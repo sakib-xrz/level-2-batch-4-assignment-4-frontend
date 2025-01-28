@@ -20,7 +20,6 @@ export default function AllProducts() {
 
   const [params, setParams] = useState({
     search: searchParams.get("search") || "",
-    product_model: searchParams.get("product_model") || "",
     brand: searchParams.get("brand") || null,
     category: searchParams.get("category") || null,
     sortBy: searchParams.get("sortBy") || "createdAt",

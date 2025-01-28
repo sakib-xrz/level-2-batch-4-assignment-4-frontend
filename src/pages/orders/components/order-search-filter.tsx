@@ -11,15 +11,15 @@ import {
 
 type TParams = {
   search: string;
-  brand: string | null;
-  category: string | null;
+  status: string | null;
+  payment_status: string | null;
   sortBy: string;
   sortOrder: string;
   page: number;
   limit: number;
 };
 
-interface ProductSearchFilterProps {
+interface OrderSearchFilterProps {
   params: TParams;
   setParams: (params: TParams) => void;
   searchKey: string;
@@ -27,13 +27,13 @@ interface ProductSearchFilterProps {
   data: BicycleApiResponse;
 }
 
-export default function ProductSearchFilter({
+export default function OrderSearchFilter({
   params,
   setParams,
   searchKey,
   handleSearchChange,
   data,
-}: ProductSearchFilterProps) {
+}: OrderSearchFilterProps) {
   const isDesktop = useDesktop();
   const [isFilterVisible, setIsFilterVisible] = useState(false);
 
@@ -41,11 +41,11 @@ export default function ProductSearchFilter({
     <div className="space-y-3">
       <div className="relative flex items-end gap-2">
         <div className="w-full space-y-2">
-          <Label htmlFor="search">Search product</Label>
+          <Label htmlFor="search">Search order</Label>
           <Input
             name="search"
             type="search"
-            placeholder="Search by bicycle name, brand, or category"
+            placeholder="Search by transaction ID or customer phone number"
             onChange={handleSearchChange}
             value={searchKey}
             allowClear
@@ -69,30 +69,32 @@ export default function ProductSearchFilter({
             <div className="absolute top-20 left-0 z-10 w-full space-y-3 rounded border border-gray-300 bg-white p-4 shadow">
               <div className="flex flex-col items-center gap-4 sm:flex-row">
                 <div className="flex w-full flex-col gap-2">
-                  <Label htmlFor="category">Filter by category</Label>
+                  <Label htmlFor="status">Filter by status</Label>
                   <Select
-                    value={params.category}
+                    value={params.status}
                     onChange={(value) => {
-                      setParams({ ...params, category: value });
+                      setParams({ ...params, status: value });
                       setIsFilterVisible(false);
                     }}
                     options={productCategoriesOptions}
-                    placeholder="Filter by category"
+                    placeholder="Filter by status"
                     optionFilterProp="label"
                     allowClear
                     showSearch
                   />
                 </div>
                 <div className="flex w-full flex-col gap-2">
-                  <Label htmlFor="brand">Filter by brand</Label>
+                  <Label htmlFor="payment_status">
+                    Filter by payment status
+                  </Label>
                   <Select
-                    value={params.brand}
+                    value={params.payment_status}
                     onChange={(value) => {
-                      setParams({ ...params, brand: value });
+                      setParams({ ...params, payment_status: value });
                       setIsFilterVisible(false);
                     }}
                     options={productBrandsOptions}
-                    placeholder="Filter by brand"
+                    placeholder="Filter by payment status"
                     optionFilterProp="label"
                     allowClear
                     showSearch
