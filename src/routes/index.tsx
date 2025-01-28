@@ -8,6 +8,7 @@ import publicRouteChildren from "./public-route-children";
 import authRouteChildren from "./auth-route-children";
 import privateRouteChildren from "./private-route-children";
 import dashboardRouteChildren from "./dashboard-route-children";
+import NotFound from "../pages/not-found";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <DashboardLayout />,
     children: dashboardRouteChildren,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

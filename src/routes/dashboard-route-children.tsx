@@ -5,6 +5,7 @@ import EditProduct from "../pages/all-products/edit";
 import MyOrder from "../pages/my-order";
 import Orders from "../pages/orders";
 import Profile from "../pages/profile";
+import Users from "../pages/users";
 
 const dashboardRouteChildren = [
   {
@@ -12,6 +13,14 @@ const dashboardRouteChildren = [
     element: (
       <PrivateRoute role={["CUSTOMER", "ADMIN"]}>
         <Profile />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "users",
+    element: (
+      <PrivateRoute role={["ADMIN"]}>
+        <Users />
       </PrivateRoute>
     ),
   },
