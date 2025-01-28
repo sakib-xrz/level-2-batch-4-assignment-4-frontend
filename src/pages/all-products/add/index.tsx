@@ -193,7 +193,7 @@ export default function AddProduct() {
 
           <div>
             <div className="mt-5 flex items-center gap-2">
-              <Link to="/all-product" className="w-full">
+              <Link to="/all-products" className="w-full">
                 <Button className="w-full" disabled={isCreateProductLoading}>
                   Cancel
                 </Button>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import TitleWithButton from "../../components/shared/title-with-button";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 import { generateQueryString, sanitizeParams } from "../../utils/constant";
 import {
@@ -122,9 +122,9 @@ export default function AllProducts() {
       render: (_text: string, record: Bicycle) => (
         <div className="text-center">
           {record.in_stock ? (
-            <Tag color="green">In Stock</Tag>
+            <Tag color="green">IN STOCK</Tag>
           ) : (
-            <Tag color="red">Out of Stock</Tag>
+            <Tag color="red">OUT OF STOCK</Tag>
           )}
         </div>
       ),
@@ -134,7 +134,12 @@ export default function AllProducts() {
       key: "action",
       render: (_text: string, record: Bicycle) => (
         <div className="flex items-center justify-center space-x-4">
-          <p className="cursor-pointer text-blue-500 hover:underline">Edit</p>
+          <Link
+            to={`/all-products/edit/${record._id}`}
+            className="cursor-pointer !text-blue-500 hover:underline"
+          >
+            Edit
+          </Link>
           <p
             className="cursor-pointer text-red-500 hover:underline"
             onClick={() => {
@@ -173,8 +178,6 @@ export default function AllProducts() {
       setId(null);
     }
   };
-
-  console.log(isLoading, data);
 
   return (
     <div className="space-y-5">

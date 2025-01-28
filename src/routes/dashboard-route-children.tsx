@@ -1,6 +1,7 @@
 import PrivateRoute from "../layout/private-route";
 import AllProducts from "../pages/all-products";
 import AddProduct from "../pages/all-products/add";
+import EditProduct from "../pages/all-products/edit";
 import MyOrder from "../pages/my-order";
 import Profile from "../pages/profile";
 
@@ -34,6 +35,14 @@ const dashboardRouteChildren = [
     element: (
       <PrivateRoute role={["ADMIN"]}>
         <AddProduct />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "all-products/edit/:id",
+    element: (
+      <PrivateRoute role={["ADMIN"]}>
+        <EditProduct />
       </PrivateRoute>
     ),
   },
