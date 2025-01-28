@@ -4,9 +4,10 @@ import { tagTypes } from "../../tagTypes";
 const orderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllOrders: builder.query({
-      query: () => ({
+      query: (query) => ({
         url: "/orders",
         method: "GET",
+        params: query,
       }),
       providesTags: [tagTypes.order],
     }),

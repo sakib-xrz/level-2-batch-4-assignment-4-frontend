@@ -172,7 +172,7 @@ export default function AllProducts() {
       toast.success("Product deleted successfully");
     } catch (error) {
       // @ts-expect-error: error might be undefined
-      toast.error(error.message || "Failed to delete Product");
+      toast.error(error.message || "Failed to delete oroduct");
     } finally {
       setId(null);
     }

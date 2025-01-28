@@ -1,6 +1,9 @@
-import { Image, Pagination, Table, Tag } from "antd";
+import { Button, Image, Modal, Pagination, Table, Tag } from "antd";
 import TitleWithButton from "../../components/shared/title-with-button";
-import { useGetAllOrdersQuery } from "../../redux/features/order/orderApi";
+import {
+  useDeleteOrderMutation,
+  useGetAllOrdersQuery,
+} from "../../redux/features/order/orderApi";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -8,6 +11,7 @@ import { generateQueryString, sanitizeParams } from "../../utils/constant.tsx";
 import OrderSearchFilter from "./components/order-search-filter";
 import { Order } from "../../types/order.types.ts";
 import dayjs from "dayjs";
+import { toast } from "sonner";
 
 export default function Orders() {
   const navigate = useNavigate();
@@ -24,6 +28,13 @@ export default function Orders() {
     page: Number(searchParams.get("page")) || 1,
     limit: Number(searchParams.get("limit")) || 10,
   });
+
+  const [id, setId] = useState<string | null>(null);
+
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
+  const [deleteOrder, { isLoading: isDeleteLoading }] =
+    useDeleteOrderMutation();
 
   const debouncedSearch = useDebouncedCallback((value) => {
     setParams((prev) => ({ ...prev, search: value, page: 1 }));
@@ -57,19 +68,6 @@ export default function Orders() {
 
   const columns = [
     {
-      title: "Order",
-      dataIndex: "transaction_id",
-      key: "transaction_id",
-      render: (_text: string, record: Order) => (
-        <div>
-          <p className="font-mono">{record.transaction_id}</p>
-          <p className="text-sm text-gray-500">
-            {dayjs(record.createdAt).format("MMM DD, hh:mm A")}
-          </p>
-        </div>
-      ),
-    },
-    {
       title: "Product",
       dataIndex: "product",
       key: "product",
@@ -90,6 +88,19 @@ export default function Orders() {
               </span>
             </p>
           </div>
+        </div>
+      ),
+    },
+    {
+      title: "Order",
+      dataIndex: "transaction_id",
+      key: "transaction_id",
+      render: (_text: string, record: Order) => (
+        <div>
+          <p className="font-mono">{record.transaction_id}</p>
+          <p className="text-sm text-gray-500">
+            {dayjs(record.createdAt).format("MMM DD, hh:mm A")}
+          </p>
         </div>
       ),
     },
@@ -152,6 +163,23 @@ export default function Orders() {
         </div>
       ),
     },
+    {
+      title: <div className="text-center">Actions</div>,
+      key: "action",
+      render: (_text: string, record: Order) => (
+        <div className="flex items-center justify-center space-x-4">
+          <p
+            className="cursor-pointer text-red-500 hover:underline"
+            onClick={() => {
+              setId(record._id);
+              setOpenDeleteModal(true);
+            }}
+          >
+            Delete
+          </p>
+        </div>
+      ),
+    },
   ];
 
   // @ts-expect-error: data might be undefined
@@ -164,6 +192,19 @@ export default function Orders() {
       sortOrder:
         order === "ascend" ? "asc" : order === "descend" ? "desc" : "desc",
     }));
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteOrder(id as string).unwrap();
+      setOpenDeleteModal(false);
+      toast.success("Order deleted successfully");
+    } catch (error) {
+      // @ts-expect-error: error might be undefined
+      toast.error(error.message || "Failed to delete order");
+    } finally {
+      setId(null);
+    }
   };
 
   return (
@@ -206,6 +247,37 @@ export default function Orders() {
           responsive={true}
         />
       )}
+
+      <Modal
+        open={openDeleteModal}
+        title="Do you really want to delete this order?"
+        closable={false}
+        footer={
+          <div className="flex items-center justify-end gap-2">
+            <Button
+              disabled={isDeleteLoading}
+              onClick={() => {
+                setOpenDeleteModal(false);
+                setId(null);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="primary"
+              danger
+              loading={isDeleteLoading}
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
+          </div>
+        }
+        centered
+        destroyOnClose
+      >
+        <p>This will permanently delete the order form our database.</p>
+      </Modal>
     </div>
   );
 }
