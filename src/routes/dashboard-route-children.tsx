@@ -2,7 +2,7 @@ import PrivateRoute from "../layout/private-route";
 import AllProducts from "../pages/all-products";
 import AddProduct from "../pages/all-products/add";
 import EditProduct from "../pages/all-products/edit";
-import MyOrder from "../pages/my-order";
+import MyOrders from "../pages/my-orders";
 import Orders from "../pages/orders";
 import Profile from "../pages/profile";
 import Users from "../pages/users";
@@ -28,7 +28,7 @@ const dashboardRouteChildren = [
     path: "my-orders",
     element: (
       <PrivateRoute role={["CUSTOMER"]}>
-        <MyOrder />
+        <MyOrders />
       </PrivateRoute>
     ),
   },

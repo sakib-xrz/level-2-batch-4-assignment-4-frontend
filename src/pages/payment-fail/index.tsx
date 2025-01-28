@@ -14,8 +14,8 @@ export default function PaymentFail() {
           later.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
-          <Link to="/my-order">
-            <Button type="primary">Go to My Order</Button>
+          <Link to="/my-orders">
+            <Button type="primary">Go to My Orders</Button>
           </Link>
         </div>
       </div>
