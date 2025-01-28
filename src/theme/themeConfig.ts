@@ -19,9 +19,9 @@ const themeConfig = {
     screenXXLMin: 1536,
     screenXXL: 1536,
 
-    controlHeightSM: 30,
-    controlHeight: 36,
-    controlHeightLG: 42,
+    controlHeightSM: 34,
+    controlHeight: 40,
+    controlHeightLG: 46,
 
     colorPrimary: "#18181b",
     colorInfo: "#18181b",

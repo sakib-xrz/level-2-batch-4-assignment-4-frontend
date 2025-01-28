@@ -57,9 +57,9 @@ export default function ProductSearchFilter({
             onClick={() => setIsFilterVisible(!isFilterVisible)}
             icon={
               isFilterVisible ? (
-                <X className="text-primary size-5" />
+                <X className="text-primary size-4" />
               ) : (
-                <SlidersHorizontal className="text-primary size-5" />
+                <SlidersHorizontal className="text-primary size-4" />
               )
             }
           >

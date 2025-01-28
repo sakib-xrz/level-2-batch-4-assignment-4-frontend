@@ -28,7 +28,7 @@ export default function Sidebar() {
     ],
   };
   return (
-    <div className="sticky top-[81px] z-50 hidden h-[calc(100vh-80px)] w-[280px] space-y-1 border-r border-gray-200 bg-white p-2 lg:block">
+    <div className="sticky top-[81px] z-50 hidden h-[calc(100vh-80px)] w-full space-y-1 border-r border-gray-200 bg-white p-2 lg:block">
       {isLoading ? (
         <div className="space-y-1">
           <div className="block h-10 animate-pulse rounded-sm bg-gray-200 px-3"></div>

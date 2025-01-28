@@ -8,8 +8,10 @@ export default function DashboardLayout() {
       <Navbar maxWidth={false} />
       <div>
         <div className="flex">
-          <Sidebar />
-          <div className="flex-1 px-4 py-5 lg:py-8">
+          <aside className="hidden w-[300px] xl:block">
+            <Sidebar />
+          </aside>
+          <div className="w-full px-4 py-5 lg:py-8">
             <Outlet />
           </div>
         </div>
