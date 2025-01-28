@@ -1,4 +1,5 @@
 import Home from "../pages/home";
+import PaymentFail from "../pages/payment-fail";
 import PaymentSuccess from "../pages/payment-success";
 import Products from "../pages/products";
 
@@ -14,6 +15,10 @@ const publicRouteChildren = [
   {
     path: "/payment-success",
     element: <PaymentSuccess />,
+  },
+  {
+    path: "/payment-fail",
+    element: <PaymentFail />,
   },
 ];
 
