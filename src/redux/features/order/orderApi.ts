@@ -18,11 +18,11 @@ const orderApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.order],
     }),
-    uodateOrderStatus: builder.mutation({
-      query: ({ id, status }) => ({
+    updateOrderStatus: builder.mutation({
+      query: ({ id, data }) => ({
         url: `/orders/${id}/status`,
         method: "PATCH",
-        body: { status },
+        body: data,
       }),
       invalidatesTags: [tagTypes.order],
     }),
@@ -39,6 +39,6 @@ const orderApi = baseApi.injectEndpoints({
 export const {
   useGetAllOrdersQuery,
   useGetMyOrdersQuery,
-  useUodateOrderStatusMutation,
+  useUpdateOrderStatusMutation,
   useDeleteOrderMutation,
 } = orderApi;

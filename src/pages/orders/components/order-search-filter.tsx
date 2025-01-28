@@ -13,8 +13,6 @@ type TParams = {
   search: string;
   status: string | null;
   payment_status: string | null;
-  sortBy: string;
-  sortOrder: string;
   page: number;
   limit: number;
 };

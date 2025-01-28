@@ -1,13 +1,18 @@
-import { Button, Image, Modal, Pagination, Table, Tag } from "antd";
+import { Button, Image, Modal, Pagination, Select, Table, Tag } from "antd";
 import TitleWithButton from "../../components/shared/title-with-button";
 import {
   useDeleteOrderMutation,
   useGetAllOrdersQuery,
+  useUpdateOrderStatusMutation,
 } from "../../redux/features/order/orderApi";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { generateQueryString, sanitizeParams } from "../../utils/constant.tsx";
+import {
+  generateQueryString,
+  orderStatusOptions,
+  sanitizeParams,
+} from "../../utils/constant.tsx";
 import OrderSearchFilter from "./components/order-search-filter";
 import { Order } from "../../types/order.types.ts";
 import dayjs from "dayjs";
@@ -23,8 +28,6 @@ export default function Orders() {
     search: searchParams.get("search") || "",
     status: searchParams.get("status") || null,
     payment_status: searchParams.get("payment_status") || null,
-    sortBy: searchParams.get("sortBy") || "createdAt",
-    sortOrder: searchParams.get("sortOrder") || "desc",
     page: Number(searchParams.get("page")) || 1,
     limit: Number(searchParams.get("limit")) || 10,
   });
@@ -35,6 +38,31 @@ export default function Orders() {
 
   const [deleteOrder, { isLoading: isDeleteLoading }] =
     useDeleteOrderMutation();
+
+  const [updateOrderStatus, { isLoading: isUpdateOrderStatusLoading }] =
+    useUpdateOrderStatusMutation();
+
+  const handleUpdateOrderStatus = async (id: string, status: string) => {
+    try {
+      await updateOrderStatus({
+        id,
+        data: {
+          status,
+        },
+      }).unwrap();
+      toast.success("Order status updated successfully.");
+    } catch (error) {
+      console.log(error);
+      toast.error(
+        // @ts-expect-error error type is unknown
+        error?.data?.error && error.data.error.length > 0
+          ? // @ts-expect-error error type is unknown
+            error.data.error[0]?.message
+          : // @ts-expect-error error type is unknown
+            error.data.message || "Failed to update order status",
+      );
+    }
+  };
 
   const debouncedSearch = useDebouncedCallback((value) => {
     setParams((prev) => ({ ...prev, search: value, page: 1 }));
@@ -149,9 +177,27 @@ export default function Orders() {
       ),
     },
     {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
+      title: <div className="text-center">Order Status</div>,
+      key: "order_status",
+      render: (_text: string, record: Order) => (
+        <div className="flex justify-center">
+          <Select
+            loading={isUpdateOrderStatusLoading}
+            disabled={isUpdateOrderStatusLoading}
+            size="small"
+            className="w-36"
+            options={orderStatusOptions}
+            value={orderStatusOptions.find(
+              (item) => item.value === record?.status,
+            )}
+            placeholder="Select Order Status"
+            onChange={(value) => {
+              // @ts-expect-error: record might be undefined
+              handleUpdateOrderStatus(record._id, value);
+            }}
+          />
+        </div>
+      ),
     },
     {
       title: <div className="text-center">Total Price</div>,
