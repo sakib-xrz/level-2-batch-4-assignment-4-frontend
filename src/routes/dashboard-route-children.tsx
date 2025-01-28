@@ -3,6 +3,7 @@ import AllProducts from "../pages/all-products";
 import AddProduct from "../pages/all-products/add";
 import EditProduct from "../pages/all-products/edit";
 import MyOrder from "../pages/my-order";
+import Orders from "../pages/orders";
 import Profile from "../pages/profile";
 
 const dashboardRouteChildren = [
@@ -43,6 +44,14 @@ const dashboardRouteChildren = [
     element: (
       <PrivateRoute role={["ADMIN"]}>
         <EditProduct />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "orders",
+    element: (
+      <PrivateRoute role={["ADMIN"]}>
+        <Orders />
       </PrivateRoute>
     ),
   },
