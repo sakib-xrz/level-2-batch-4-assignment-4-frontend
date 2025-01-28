@@ -228,18 +228,6 @@ export default function Orders() {
     },
   ];
 
-  // @ts-expect-error: data might be undefined
-  const handleTableChange = (_pagination, _filters, sorter) => {
-    const { order, columnKey } = sorter;
-
-    setParams((prev) => ({
-      ...prev,
-      sortBy: columnKey || "created_at",
-      sortOrder:
-        order === "ascend" ? "asc" : order === "descend" ? "desc" : "desc",
-    }));
-  };
-
   const handleDelete = async () => {
     try {
       await deleteOrder(id as string).unwrap();
@@ -276,7 +264,6 @@ export default function Orders() {
           x: "max-content",
         }}
         rowKey={(record) => record.id}
-        onChange={handleTableChange}
       />
 
       {!isLoading && (
