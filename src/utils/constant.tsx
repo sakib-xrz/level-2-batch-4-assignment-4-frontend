@@ -123,3 +123,99 @@ export const productBrandsOptions = [
     value: "VoltX",
   },
 ];
+
+export const paymentStatusOptions = [
+  {
+    key: "1",
+    value: "PENDING",
+    label: (
+      <div className="flex items-center gap-2">
+        <span className="text-gray-500">●</span>
+        <span>Pending</span>
+      </div>
+    ),
+  },
+  {
+    key: "2",
+    value: "PAID",
+    label: (
+      <div className="flex items-center gap-2">
+        <span className="text-green-500">●</span>
+        <span>PAID</span>
+      </div>
+    ),
+  },
+  {
+    key: "3",
+    value: "FAILED",
+    label: (
+      <div className="flex items-center gap-2">
+        <span className="text-red-500">●</span>
+        <span>Failed</span>
+      </div>
+    ),
+  },
+  {
+    key: "4",
+    value: "CANCELLED",
+    label: (
+      <div className="flex items-center gap-2">
+        <span className="text-orange-500">●</span>
+        <span>Cancelled</span>
+      </div>
+    ),
+  },
+];
+
+export const orderStatusOptions = [
+  {
+    key: "1",
+    value: "PENDING",
+    label: (
+      <div className="flex items-center gap-2">
+        <p style={{ color: "grey" }}>●</p>
+        Pending
+      </div>
+    ),
+  },
+  {
+    key: "2",
+    value: "PROCESSING",
+    label: (
+      <div className="flex items-center gap-2">
+        <p style={{ color: "yellowgreen" }}>●</p>
+        Processing
+      </div>
+    ),
+  },
+  {
+    key: "3",
+    value: "SHIPPED",
+    label: (
+      <div className="flex items-center gap-2">
+        <p style={{ color: "blue" }}>●</p>
+        Shipped
+      </div>
+    ),
+  },
+  {
+    key: "4",
+    value: "DELIVERED",
+    label: (
+      <div className="flex items-center gap-2">
+        <p style={{ color: "green" }}>●</p>
+        Delivered
+      </div>
+    ),
+  },
+  {
+    key: "6",
+    value: "CANCELLED",
+    label: (
+      <div className="flex items-center gap-2">
+        <p style={{ color: "red" }}>●</p>
+        Cancelled
+      </div>
+    ),
+  },
+];

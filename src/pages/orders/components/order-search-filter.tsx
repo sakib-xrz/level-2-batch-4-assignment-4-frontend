@@ -3,11 +3,11 @@ import Label from "../../../components/shared/label";
 import { useState } from "react";
 import useDesktop from "../../../hooks/use-desktop";
 import { SlidersHorizontal, X } from "lucide-react";
-import { BicycleApiResponse } from "../../../types/bicycle.types";
+import { OrderApiResponse } from "../../../types/order.types.ts";
 import {
-  productBrandsOptions,
-  productCategoriesOptions,
-} from "../../../utils/constant";
+  orderStatusOptions,
+  paymentStatusOptions,
+} from "../../../utils/constant.tsx";
 
 type TParams = {
   search: string;
@@ -24,7 +24,7 @@ interface OrderSearchFilterProps {
   setParams: (params: TParams) => void;
   searchKey: string;
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  data: BicycleApiResponse;
+  data: OrderApiResponse;
 }
 
 export default function OrderSearchFilter({
@@ -76,7 +76,7 @@ export default function OrderSearchFilter({
                       setParams({ ...params, status: value });
                       setIsFilterVisible(false);
                     }}
-                    options={productCategoriesOptions}
+                    options={orderStatusOptions}
                     placeholder="Filter by status"
                     optionFilterProp="label"
                     allowClear
@@ -93,7 +93,7 @@ export default function OrderSearchFilter({
                       setParams({ ...params, payment_status: value });
                       setIsFilterVisible(false);
                     }}
-                    options={productBrandsOptions}
+                    options={paymentStatusOptions}
                     placeholder="Filter by payment status"
                     optionFilterProp="label"
                     allowClear

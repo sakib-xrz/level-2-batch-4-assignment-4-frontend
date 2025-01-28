@@ -9,7 +9,7 @@ import {
 import { RootState } from "../store";
 import { toast } from "sonner";
 import { logout, setUser } from "../features/auth/authSlice";
-import { BASE_URL } from "../../utils/constant";
+import { BASE_URL } from "../../utils/constant.tsx";
 import { tagTypesList } from "../tagTypes";
 
 const baseQuery = fetchBaseQuery({

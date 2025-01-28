@@ -7,7 +7,7 @@ import { BicycleApiResponse } from "../../../types/bicycle.types";
 import {
   productBrandsOptions,
   productCategoriesOptions,
-} from "../../../utils/constant";
+} from "../../../utils/constant.tsx";
 
 type TParams = {
   search: string;

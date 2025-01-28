@@ -1,11 +1,13 @@
-import { Pagination, Table } from "antd";
+import { Image, Pagination, Table, Tag } from "antd";
 import TitleWithButton from "../../components/shared/title-with-button";
 import { useGetAllOrdersQuery } from "../../redux/features/order/orderApi";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { generateQueryString, sanitizeParams } from "../../utils/constant";
+import { generateQueryString, sanitizeParams } from "../../utils/constant.tsx";
 import OrderSearchFilter from "./components/order-search-filter";
+import { Order } from "../../types/order.types.ts";
+import dayjs from "dayjs";
 
 export default function Orders() {
   const navigate = useNavigate();
@@ -53,7 +55,104 @@ export default function Orders() {
 
   const dataSource = data?.data || [];
 
-  const columns = [];
+  const columns = [
+    {
+      title: "Order",
+      dataIndex: "transaction_id",
+      key: "transaction_id",
+      render: (_text: string, record: Order) => (
+        <div>
+          <p className="font-mono">{record.transaction_id}</p>
+          <p className="text-sm text-gray-500">
+            {dayjs(record.createdAt).format("MMM DD, hh:mm A")}
+          </p>
+        </div>
+      ),
+    },
+    {
+      title: "Product",
+      dataIndex: "product",
+      key: "product",
+      render: (_text: string, record: Order) => (
+        <div className="flex items-center gap-3">
+          <Image
+            width={50}
+            height={50}
+            src={record.product.image}
+            alt={record.product.name}
+          />
+          <div>
+            <p>{record.product.name} </p>
+            <p className="text-sm text-gray-500">
+              {record.product.product_model}{" "}
+              <span className="font-bold text-green-600">
+                (x{record.quantity})
+              </span>
+            </p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Customer",
+      dataIndex: "customer",
+      key: "customer",
+      render: (_text: string, record: Order) => (
+        <div>
+          <p>{record.customer.name}</p>
+          <p className="text-sm text-gray-500">{record.phone}</p>
+        </div>
+      ),
+    },
+    {
+      title: "Shipping Address",
+      dataIndex: "delivery_address",
+      key: "delivery_address",
+      render: (_text: string, record: Order) => (
+        <p className="line-clamp-2 max-w-64 text-sm">
+          {record.delivery_address}
+        </p>
+      ),
+      width: 250,
+    },
+    {
+      title: <div className="text-center">Payment Status</div>,
+      dataIndex: "payment_status",
+      key: "payment_status",
+      render: (_text: string, record: Order) => (
+        <div className="text-center">
+          <Tag
+            color={
+              record.payment_status === "PAID"
+                ? "green"
+                : record.payment_status === "PENDING"
+                  ? "gray"
+                  : record.payment_status === "FAILED"
+                    ? "red"
+                    : "orange"
+            }
+          >
+            {record.payment_status}
+          </Tag>
+        </div>
+      ),
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: <div className="text-center">Total Price</div>,
+      dataIndex: "grand_total",
+      key: "grand_total",
+      render: (_text: string, record: Order) => (
+        <div className="text-center">
+          <p className="font-bold text-green-600">{record.grand_total} Tk.</p>
+        </div>
+      ),
+    },
+  ];
 
   // @ts-expect-error: data might be undefined
   const handleTableChange = (_pagination, _filters, sorter) => {
@@ -80,7 +179,7 @@ export default function Orders() {
         data={data}
       />
 
-      {/* <Table
+      <Table
         bordered
         dataSource={dataSource}
         columns={columns}
@@ -91,7 +190,7 @@ export default function Orders() {
         }}
         rowKey={(record) => record.id}
         onChange={handleTableChange}
-      /> */}
+      />
 
       {!isLoading && (
         <Pagination

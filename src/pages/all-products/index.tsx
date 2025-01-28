@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TitleWithButton from "../../components/shared/title-with-button";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
-import { generateQueryString, sanitizeParams } from "../../utils/constant";
+import { generateQueryString, sanitizeParams } from "../../utils/constant.tsx";
 import {
   useDeleteProductMutation,
   useGetProductsQuery,

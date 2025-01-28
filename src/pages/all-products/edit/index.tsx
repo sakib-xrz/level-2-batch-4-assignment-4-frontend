@@ -8,7 +8,7 @@ import Label from "../../../components/shared/label";
 import {
   productBrandsOptions,
   productCategoriesOptions,
-} from "../../../utils/constant";
+} from "../../../utils/constant.tsx";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import FormikErrorBox from "../../../components/shared/formik-error-box";
