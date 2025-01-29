@@ -1,5 +1,6 @@
 import React from "react";
 import ProductCard from "../../../components/ui/product-card";
+import Container from "../../../components/shared/container";
 
 const products = [
   {
@@ -58,8 +59,8 @@ const products = [
 
 const FeaturedProducts: React.FC = () => {
   return (
-    <section className="bg-white py-20 text-gray-900">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="bg-white text-gray-900">
+      <Container>
         {/* Section Title */}
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-bold text-[#18181b]">Featured Bikes</h2>
@@ -69,12 +70,12 @@ const FeaturedProducts: React.FC = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {products.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

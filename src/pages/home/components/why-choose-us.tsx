@@ -37,7 +37,7 @@ const features = [
 const WhyChooseUs: React.FC = () => {
   return (
     <Container className="text-gray-900">
-      <div className="mx-auto max-w-7xl px-6">
+      <div>
         {/* Section Title */}
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-bold text-[#18181b]">Why Choose Us?</h2>
