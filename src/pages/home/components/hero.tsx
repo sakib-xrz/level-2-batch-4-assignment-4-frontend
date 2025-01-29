@@ -7,7 +7,7 @@ const Hero: React.FC = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="/src/assets/images/hero.webp"
+          src="../../../assets/images/hero.webp"
           alt="Bicycle Store"
           className="h-full w-full object-cover opacity-50"
         />
