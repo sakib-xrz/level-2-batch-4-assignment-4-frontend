@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useGetCustomersQuery } from "../../redux/features/user/userApi";
+import {
+  useBlockUserMutation,
+  useGetCustomersQuery,
+} from "../../redux/features/user/userApi";
 import { generateQueryString, sanitizeParams } from "../../utils/constant";
 import { useDebouncedCallback } from "use-debounce";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Pagination, Table } from "antd";
+import { Pagination, Switch, Table } from "antd";
 import TitleWithButton from "../../components/shared/title-with-button";
 import UserSearchFilter from "./components/user-search-filter";
 import { Customer } from "../../types/customer.types";
@@ -21,7 +24,9 @@ export default function Users() {
     limit: Number(searchParams.get("limit")) || 10,
   });
 
-  // const [id, setId] = useState<string | null>(null);
+  const [id, setId] = useState<string | null>(null);
+
+  const [blockUser, { isLoading: isBlockUserLoading }] = useBlockUserMutation();
 
   const debouncedSearch = useDebouncedCallback((value) => {
     setParams((prev) => ({ ...prev, search: value, page: 1 }));
@@ -76,9 +81,23 @@ export default function Users() {
       ),
     },
     {
-      title: "Status",
+      title: <div className="text-center">Block Customer</div>,
       dataIndex: "is_blocked",
       key: "is_blocked",
+      render: (_text: string, record: Customer) => (
+        <div className="text-center">
+          <Switch
+            loading={isBlockUserLoading && id === record._id}
+            checkedChildren="BLOCK"
+            unCheckedChildren="UNBLOCK"
+            defaultChecked={record.is_blocked}
+            onChange={() => {
+              setId(record._id);
+              blockUser(record._id);
+            }}
+          />
+        </div>
+      ),
     },
   ];
 
