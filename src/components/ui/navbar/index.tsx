@@ -5,11 +5,8 @@ import { Menu, X } from "lucide-react";
 import { Button } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "../../../utils/cn";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import {
-  logout,
-  useCurrentToken,
-} from "../../../redux/features/auth/authSlice";
+import { useAppSelector } from "../../../redux/hooks";
+import { useCurrentToken } from "../../../redux/features/auth/authSlice";
 import { useGetProfileQuery } from "../../../redux/features/profile/profileApi";
 import UserProfile from "./user-profile";
 import { IUser } from "../../../types/user.types";
@@ -24,7 +21,6 @@ export default function Navbar({ maxWidth = true }: INavItem) {
   const location = useLocation();
   const pathname = location.pathname;
 
-  const dispatch = useAppDispatch();
   const token = useAppSelector(useCurrentToken);
 
   const { data, isLoading } = useGetProfileQuery({}, { skip: !token });
@@ -175,8 +171,7 @@ export default function Navbar({ maxWidth = true }: INavItem) {
                   )}
                   <div
                     onClick={() => {
-                      dispatch(logout());
-                      navigate("/login");
+                      navigate("/logout");
                       setMobileMenuOpen(false);
                     }}
                     className="block w-full"

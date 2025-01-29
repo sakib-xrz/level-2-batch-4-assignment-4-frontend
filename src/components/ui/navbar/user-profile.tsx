@@ -5,8 +5,6 @@ import { Dropdown } from "antd";
 import UserProfileBox from "./user-profile-box";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Box, LogOut, ShoppingBag, User, UserRound, Users } from "lucide-react";
-import { useAppDispatch } from "../../../redux/hooks";
-import { logout } from "../../../redux/features/auth/authSlice";
 import { IUser } from "../../../types/user.types";
 
 interface UserProfileProps {
@@ -16,7 +14,6 @@ interface UserProfileProps {
 
 export default function UserProfile({ user, isLoading }: UserProfileProps) {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const location = useLocation();
   const pathname = location.pathname;
 
@@ -31,10 +28,6 @@ export default function UserProfile({ user, isLoading }: UserProfileProps) {
       </div>
     );
   }
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   const dropdownItems: { [key: string]: MenuProps["items"] } = {
     ADMIN: [
@@ -80,8 +73,7 @@ export default function UserProfile({ user, isLoading }: UserProfileProps) {
           <div
             className="flex items-center gap-2"
             onClick={() => {
-              handleLogout();
-              navigate("/login");
+              navigate("/logout");
             }}
           >
             <LogOut className="size-5" /> Logout
@@ -117,8 +109,7 @@ export default function UserProfile({ user, isLoading }: UserProfileProps) {
           <div
             className="flex items-center gap-2"
             onClick={() => {
-              handleLogout();
-              navigate("/login");
+              navigate("/logout");
             }}
           >
             <LogOut className="size-5" /> Logout
