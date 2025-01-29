@@ -9,6 +9,7 @@ import authRouteChildren from "./auth-route-children";
 import privateRouteChildren from "./private-route-children";
 import dashboardRouteChildren from "./dashboard-route-children";
 import NotFound from "../pages/not-found";
+import Logout from "../pages/logout";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <DashboardLayout />,
     children: dashboardRouteChildren,
+  },
+  {
+    path: "/logout",
+    element: <Logout />,
   },
   {
     path: "*",
