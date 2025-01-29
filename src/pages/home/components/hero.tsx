@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Content Box */}
-      <div className="bg-opacity-20 relative z-10 max-w-4xl rounded-xl px-4 py-8 text-center text-white backdrop-blur-lg sm:p-10">
+      <div className="bg-opacity-20 relative z-10 max-w-4xl px-4 py-8 text-center text-white backdrop-blur-lg sm:rounded-xl sm:p-10">
         <h1 className="text-4xl leading-tight font-extrabold sm:text-5xl md:text-6xl">
           Elevate Your Ride <br />
           <span className="text-[#c2ab8e]">Premium Bicycles</span>
