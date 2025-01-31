@@ -16,6 +16,10 @@ interface INavItem {
   maxWidth?: boolean;
 }
 
+const primaryColor = "#b89579";
+
+const primaryButtonStyle = `flex items-center justify-center gap-2 rounded-lg font-semibold transition py-1.5 sm:py-2 w-full rounded-lg px-4 text-lg text-white shadow-none hover:bg-[#a48d70] bg-[${primaryColor}] cursor-pointer`;
+
 export default function Navbar({ maxWidth = true }: INavItem) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -104,7 +108,7 @@ export default function Navbar({ maxWidth = true }: INavItem) {
               Log in
             </Link>
             <Link to="/register" className="ml-4">
-              <Button type="primary">Sign up</Button>
+              <button className={primaryButtonStyle}>Sign up</button>
             </Link>
           </div>
         )}
@@ -200,9 +204,7 @@ export default function Navbar({ maxWidth = true }: INavItem) {
                     onClick={() => setMobileMenuOpen(false)}
                     className="block w-full"
                   >
-                    <Button type="primary" className="w-full">
-                      Sign Up
-                    </Button>
+                    <button className={primaryButtonStyle}>Sign up</button>
                   </Link>
                 </>
               )}

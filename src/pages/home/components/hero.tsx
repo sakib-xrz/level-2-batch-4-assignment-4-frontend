@@ -1,6 +1,11 @@
 import React from "react";
-import { Button } from "antd";
 import { Link } from "react-router-dom";
+
+const primaryColor = "#b89579";
+
+const primaryButtonStyle = `flex items-center justify-center gap-2 rounded-lg font-semibold transition py-1.5 sm:py-2 w-full rounded-lg px-4 text-lg text-white shadow-none hover:bg-[#a48d70] bg-[${primaryColor}] cursor-pointer`;
+
+const secondaryButtonStyle = `flex items-center justify-center gap-2 rounded-lg font-semibold transition py-1.5 sm:py-2 w-full rounded-lg px-4 text-lg text-[${primaryColor}] shadow-none hover:bg-white border border-[${primaryColor}] bg-transparent cursor-pointer`;
 
 const Hero: React.FC = () => {
   return (
@@ -26,20 +31,10 @@ const Hero: React.FC = () => {
         </p>
         <div className="mt-6 flex justify-center gap-4">
           <a href="#featured-products">
-            <Button
-              type="primary"
-              className="rounded-lg border-none !bg-[#b89579] px-6 py-3 text-lg text-black transition hover:!bg-[#a48d70]"
-            >
-              Shop Now
-            </Button>
+            <button className={primaryButtonStyle}>Shop Now</button>
           </a>
           <Link to="/products">
-            <Button
-              type="default"
-              className="rounded-lg border-[#b89579] px-6 py-3 text-lg text-[#b89579] transition hover:!bg-[#b89579] hover:!text-black"
-            >
-              Explore Bikes
-            </Button>
+            <button className={secondaryButtonStyle}>Explore Bikes</button>
           </Link>
         </div>
       </div>
