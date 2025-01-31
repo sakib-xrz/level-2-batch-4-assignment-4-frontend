@@ -1,7 +1,5 @@
+import Container from "../../components/shared/container";
+
 export default function Products() {
-  return (
-    <div className="flex h-[calc(100vh-300px)] items-center justify-center bg-gray-300">
-      Products
-    </div>
-  );
+  return <Container className="">Products</Container>;
 }

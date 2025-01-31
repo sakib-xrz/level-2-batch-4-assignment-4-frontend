@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer className="border-t border-gray-200 bg-white shadow-sm">
-      <div className="mx-auto max-w-7xl px-4 py-8">
+      <div className="mx-auto max-w-[1440px] px-4 py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <Link to="/" className="text-2xl font-bold text-gray-900">
             Bicycle Store

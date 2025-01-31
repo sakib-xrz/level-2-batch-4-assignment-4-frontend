@@ -59,7 +59,7 @@ export default function Navbar({ maxWidth = true }: INavItem) {
             "max-w-none": !maxWidth,
           },
           {
-            "max-w-7xl": maxWidth,
+            "max-w-[1440px]": maxWidth,
           },
         )}
       >
