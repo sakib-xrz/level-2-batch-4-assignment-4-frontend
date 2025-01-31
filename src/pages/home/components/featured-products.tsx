@@ -62,8 +62,10 @@ const FeaturedProducts: React.FC = () => {
     <section className="bg-white text-gray-900">
       <Container>
         {/* Section Title */}
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold text-[#18181b]">Featured Bikes</h2>
+        <div className="mb-12 text-center" id="featured-products">
+          <h2 className="text-4xl font-bold text-[#18181b]">
+            Featured Bicycles
+          </h2>
           <p className="mt-2 text-gray-600">
             Discover the latest premium bicycles designed for performance.
           </p>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "antd";
+import { Link } from "react-router-dom";
 
 const Hero: React.FC = () => {
   return (
@@ -24,18 +25,22 @@ const Hero: React.FC = () => {
           comfort. Designed for the ultimate riding experience. Shop now!
         </p>
         <div className="mt-6 flex justify-center gap-4">
-          <Button
-            type="primary"
-            className="rounded-lg border-none !bg-[#c2ab8e] px-6 py-3 text-lg text-black transition hover:!bg-[#a48d70]"
-          >
-            Shop Now
-          </Button>
-          <Button
-            type="default"
-            className="rounded-lg border-[#c2ab8e] px-6 py-3 text-lg text-[#c2ab8e] transition hover:!bg-[#c2ab8e] hover:!text-black"
-          >
-            Explore Bikes
-          </Button>
+          <a href="#featured-products">
+            <Button
+              type="primary"
+              className="rounded-lg border-none !bg-[#c2ab8e] px-6 py-3 text-lg text-black transition hover:!bg-[#a48d70]"
+            >
+              Shop Now
+            </Button>
+          </a>
+          <Link to="/products">
+            <Button
+              type="default"
+              className="rounded-lg border-[#c2ab8e] px-6 py-3 text-lg text-[#c2ab8e] transition hover:!bg-[#c2ab8e] hover:!text-black"
+            >
+              Explore Bikes
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

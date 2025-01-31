@@ -19,7 +19,7 @@ interface ProductProps {
 
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
   return (
-    <div className="flex cursor-pointer flex-col gap-2 rounded-lg bg-white p-2 shadow-md sm:p-4">
+    <div className="flex cursor-pointer flex-col gap-2 rounded-lg border border-gray-300 bg-white p-2 shadow-md sm:p-4">
       {/* Product Image */}
       <div className="relative rounded-lg">
         <img
@@ -29,23 +29,29 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
         />
 
         {/* Stock Status Badge */}
-        <span className={`absolute top-2 right-2`}>
+        <span className={`absolute top-1 right-1`}>
           {product.in_stock ? (
-            <Tag color="green">In Stock</Tag>
+            <Tag color="green" className="!text-xs">
+              In Stock
+            </Tag>
           ) : (
-            <Tag color="red">Out of Stock</Tag>
+            <Tag color="red" className="!text-xs">
+              Out of Stock
+            </Tag>
           )}
         </span>
       </div>
 
       {/* Product Info */}
-      <h3 className="line-clamp-1 text-lg font-semibold text-gray-900">
+      <h3 className="line-clamp-1 text-base font-semibold text-gray-900">
         {product.name}
       </h3>
-      <p className="line-clamp-1 text-sm font-medium text-gray-500">
+      <p className="line-clamp-1 text-xs font-medium text-gray-500">
         {product.brand} | {product.category}
       </p>
-      <p className="text-xl font-bold text-[#c2ab8e]">${product.price}</p>
+      <p className="text-xl font-bold text-[#c2ab8e] lg:text-2xl">
+        ${product.price}
+      </p>
 
       {/* CTA Button */}
       <button
