@@ -49,13 +49,13 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
       <p className="line-clamp-1 text-xs font-medium text-gray-500">
         {product.brand} | {product.category}
       </p>
-      <p className="text-xl font-bold text-[#c2ab8e] lg:text-2xl">
+      <p className="text-xl font-bold text-[#b89579] lg:text-2xl">
         ${product.price}
       </p>
 
       {/* CTA Button */}
       <button
-        className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-1 font-semibold transition sm:py-2 ${product.in_stock ? "bg-[#c2ab8e] text-white hover:bg-[#a48d70]" : "cursor-not-allowed bg-gray-300 text-gray-500"}`}
+        className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg py-1 font-semibold transition sm:py-2 ${product.in_stock ? "bg-[#b89579] text-white hover:bg-[#a48d70]" : "cursor-not-allowed bg-gray-300 text-gray-500"}`}
         disabled={!product.in_stock}
       >
         <ShoppingOutlined />

@@ -41,6 +41,13 @@ const productApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.product],
     }),
+    getPriceRange: builder.query({
+      query: () => ({
+        url: "/products/price-range",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.product],
+    }),
   }),
 });
 
@@ -50,4 +57,5 @@ export const {
   useCreateProductMutation,
   useEditProductMutation,
   useDeleteProductMutation,
+  useGetPriceRangeQuery,
 } = productApi;

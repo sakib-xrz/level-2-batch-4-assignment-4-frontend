@@ -12,25 +12,25 @@ const features = [
     title: "Premium Quality",
     description:
       "All our bicycles are made from high-end materials to ensure durability and performance.",
-    icon: <SafetyCertificateOutlined className="text-4xl text-[#c2ab8e]" />,
+    icon: <SafetyCertificateOutlined className="text-4xl text-[#b89579]" />,
   },
   {
     title: "Super Fast Shipping",
     description:
       "Get your bicycle delivered to your doorstep quickly with our fast nationwide shipping.",
-    icon: <ThunderboltOutlined className="text-4xl text-[#c2ab8e]" />,
+    icon: <ThunderboltOutlined className="text-4xl text-[#b89579]" />,
   },
   {
     title: "24/7 Customer Support",
     description:
       "We provide round-the-clock support to assist you with any inquiries or issues.",
-    icon: <CustomerServiceOutlined className="text-4xl text-[#c2ab8e]" />,
+    icon: <CustomerServiceOutlined className="text-4xl text-[#b89579]" />,
   },
   {
     title: "Exclusive Deals & Offers",
     description:
       "Enjoy special discounts and rewards on your first purchase and seasonal sales.",
-    icon: <GiftOutlined className="text-4xl text-[#c2ab8e]" />,
+    icon: <GiftOutlined className="text-4xl text-[#b89579]" />,
   },
 ];
 
