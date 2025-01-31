@@ -12,6 +12,7 @@ import { useEffect } from "react";
 type TParams = {
   minPrice: number;
   maxPrice: number;
+  in_stock: string | null;
   brand: string | null;
   category: string | null;
   sortBy: string;
@@ -60,6 +61,7 @@ export default function Filter({ params, setParams }: FilterProps) {
               setParams((params) => ({
                 ...params,
                 minPrice: Number(value),
+                page: 1,
               }));
             }}
             size="small"
@@ -73,9 +75,39 @@ export default function Filter({ params, setParams }: FilterProps) {
               setParams((params) => ({
                 ...params,
                 maxPrice: Number(value),
+                page: 1,
               }));
             }}
             size="small"
+          />
+        </div>
+      </div>
+      <div>
+        <div className="mt-5"></div>
+        <p className="font-bahnschrift text-lg text-[#5b5b5b]">Availability</p>
+        <hr className="border border-gray-200" />
+        <div className="-mt-[2px] h-0.5 w-[50px] bg-[#b89579]"></div>
+
+        <div className="my-4">
+          <Radio.Group
+            options={[
+              { label: "All", value: null },
+              { label: "In Stock", value: "true" },
+              { label: "Out of Stock", value: "false" },
+            ]}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 8,
+            }}
+            value={params.in_stock}
+            onChange={(e: RadioChangeEvent) => {
+              setParams((params) => ({
+                ...params,
+                in_stock: e.target.value,
+                page: 1,
+              }));
+            }}
           />
         </div>
       </div>
@@ -101,6 +133,7 @@ export default function Filter({ params, setParams }: FilterProps) {
               setParams((params) => ({
                 ...params,
                 category: e.target.value,
+                page: 1,
               }));
             }}
           />
@@ -125,6 +158,7 @@ export default function Filter({ params, setParams }: FilterProps) {
               setParams((params) => ({
                 ...params,
                 brand: e.target.value,
+                page: 1,
               }));
             }}
           />
