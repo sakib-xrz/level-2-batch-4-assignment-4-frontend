@@ -10,8 +10,8 @@ import { useGetPriceRangeQuery } from "../../../redux/features/product/productAp
 import { useEffect } from "react";
 
 type TParams = {
-  minPrice: number;
-  maxPrice: number;
+  minPrice: number | null;
+  maxPrice: number | null;
   in_stock: string | null;
   brand: string | null;
   category: string | null;
