@@ -73,7 +73,7 @@ export default function ProductSearchFilter({
                   <Select
                     value={params.category}
                     onChange={(value) => {
-                      setParams({ ...params, category: value });
+                      setParams({ ...params, category: value, page: 1 });
                       setIsFilterVisible(false);
                     }}
                     options={productCategoriesOptions}
@@ -88,7 +88,7 @@ export default function ProductSearchFilter({
                   <Select
                     value={params.brand}
                     onChange={(value) => {
-                      setParams({ ...params, brand: value });
+                      setParams({ ...params, brand: value, page: 1 });
                       setIsFilterVisible(false);
                     }}
                     options={productBrandsOptions}

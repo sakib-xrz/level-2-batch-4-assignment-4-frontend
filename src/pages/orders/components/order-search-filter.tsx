@@ -71,7 +71,7 @@ export default function OrderSearchFilter({
                   <Select
                     value={params.status}
                     onChange={(value) => {
-                      setParams({ ...params, status: value });
+                      setParams({ ...params, status: value, page: 1 });
                       setIsFilterVisible(false);
                     }}
                     options={orderStatusOptions}
@@ -88,7 +88,7 @@ export default function OrderSearchFilter({
                   <Select
                     value={params.payment_status}
                     onChange={(value) => {
-                      setParams({ ...params, payment_status: value });
+                      setParams({ ...params, payment_status: value, page: 1 });
                       setIsFilterVisible(false);
                     }}
                     options={paymentStatusOptions}
