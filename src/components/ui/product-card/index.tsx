@@ -83,6 +83,8 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
             toast.message("Admins can't buy products", {
               description: "Please login as a customer to buy products",
             });
+          } else {
+            navigate(`/checkout?product=${product._id}&quantity=1`);
           }
         }}
       >
