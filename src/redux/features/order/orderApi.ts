@@ -3,6 +3,14 @@ import { tagTypes } from "../../tagTypes";
 
 const orderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    createOrder: builder.mutation({
+      query: (data) => ({
+        url: "/orders",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: [tagTypes.order],
+    }),
     getAllOrders: builder.query({
       query: (query) => ({
         url: "/orders",
@@ -37,6 +45,7 @@ const orderApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useCreateOrderMutation,
   useGetAllOrdersQuery,
   useGetMyOrdersQuery,
   useUpdateOrderStatusMutation,

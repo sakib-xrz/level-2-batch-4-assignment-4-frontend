@@ -2,11 +2,15 @@ import { useFormik } from "formik";
 import Container from "../../components/shared/container";
 import { useGetSingleProductQuery } from "../../redux/features/product/productApi";
 import { useSearchParams } from "react-router-dom";
-import { Input, Spin } from "antd";
+import { Button, Input, Spin } from "antd";
 import { useGetProfileQuery } from "../../redux/features/profile/profileApi";
 import FormInput from "../../components/form/form-input";
 import { useEffect } from "react";
 import Label from "../../components/shared/label";
+import { useCreateOrderMutation } from "../../redux/features/order/orderApi";
+import { useCreatePaymentIntentMutation } from "../../redux/features/payment/paymentApi";
+import FormikErrorBox from "../../components/shared/formik-error-box";
+import { toast } from "sonner";
 
 export default function Checkout() {
   const [searchParams] = useSearchParams();
@@ -23,6 +27,12 @@ export default function Checkout() {
   const user = profileData?.data;
   const product = productsData?.data;
 
+  const [createOrder, { isLoading: createOrderLoading }] =
+    useCreateOrderMutation();
+
+  const [createPaymentIntent, { isLoading: createPaymentIntentLoading }] =
+    useCreatePaymentIntentMutation();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -33,8 +43,30 @@ export default function Checkout() {
       quantity: Number(quantity),
       delivery_address: "",
     },
-    onSubmit: (values) => {
-      console.log(values);
+
+    onSubmit: async (values) => {
+      const payload = {
+        customer: values.customer,
+        product: values.product,
+        quantity: values.quantity,
+        delivery_address: values.delivery_address,
+        phone: values.phone.startsWith("+88")
+          ? values.phone
+          : `+88${values.phone}`,
+      };
+
+      try {
+        const orderResponse = await createOrder(payload).unwrap();
+        const order_id = orderResponse?.data?._id;
+        const paymentIntentResponse =
+          await createPaymentIntent(order_id).unwrap();
+        const paymentUrl = paymentIntentResponse?.data?.paymentURL;
+        window.location.href = paymentUrl;
+      } catch (error) {
+        console.log(error);
+        // @ts-expect-error error type
+        toast.error(error?.data?.message || "Failed to place order");
+      }
     },
   });
 
@@ -76,7 +108,7 @@ export default function Checkout() {
                 />
 
                 <div className="space-y-1">
-                  <Label htmlFor="delivery_address" className={"py-1"}>
+                  <Label htmlFor="delivery_address" className={"py-1"} required>
                     Delivery Address
                   </Label>
                   <Input.TextArea
@@ -87,6 +119,7 @@ export default function Checkout() {
                       resize: "none",
                     }}
                   />
+                  <FormikErrorBox name="delivery_address" formik={formik} />
                 </div>
               </div>
 
@@ -206,12 +239,13 @@ export default function Checkout() {
                       </p>
                     </div>
 
-                    <button
-                      type="submit"
-                      className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#b89579] py-1 font-semibold text-white transition hover:bg-[#a48d70] sm:py-2`}
+                    <Button
+                      htmlType="submit"
+                      className={`!hover:bg-[#a48d70] w-full !rounded-lg !bg-[#b89579] !text-white`}
+                      loading={createOrderLoading || createPaymentIntentLoading}
                     >
                       Place Order
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
