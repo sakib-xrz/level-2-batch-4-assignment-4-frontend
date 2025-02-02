@@ -2,6 +2,10 @@ import React from "react";
 import { ShoppingOutlined } from "@ant-design/icons";
 import { Tag } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../redux/hooks";
+import { useCurrentToken } from "../../../redux/features/auth/authSlice";
+import { verifyToken } from "../../../utils/verifyUser";
+import { toast } from "sonner";
 
 interface ProductProps {
   product: {
@@ -20,6 +24,17 @@ interface ProductProps {
 
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
   const navigate = useNavigate();
+
+  const token = useAppSelector(useCurrentToken);
+
+  let role = null;
+
+  if (token) {
+    const user = verifyToken(token as string);
+    // @ts-expect-error: user object might not have role
+    role = user.role;
+  }
+
   return (
     <div
       className="flex cursor-pointer flex-col gap-2 rounded-lg border border-gray-300 bg-white p-2 shadow-md sm:p-4"
@@ -64,7 +79,11 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
         disabled={!product.in_stock}
         onClick={(e) => {
           e.stopPropagation();
-          alert("Buy Now Clicked");
+          if (role === "ADMIN") {
+            toast.message("Admins can't buy products", {
+              description: "Please login as a customer to buy products",
+            });
+          }
         }}
       >
         <ShoppingOutlined />

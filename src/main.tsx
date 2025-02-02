@@ -15,7 +15,7 @@ import { RouterProvider } from "react-router-dom";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <Toaster position="top-center" richColors visibleToasts={1} />
+      <Toaster position="bottom-right" visibleToasts={1} />
       <ConfigProvider theme={themeConfig}>
         <PersistGate loading={null} persistor={persistor}>
           <RouterProvider router={router} />
