@@ -79,6 +79,21 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
         disabled={!product.in_stock}
         onClick={(e) => {
           e.stopPropagation();
+          if (!token) {
+            toast.message("Please login to buy products", {
+              description: "You need to login to buy products",
+              action: {
+                label: "Login",
+                onClick: () => {
+                  navigate(
+                    `/login?next=/checkout?product=${product._id}&quantity=1`,
+                  );
+                },
+              },
+            });
+            return;
+          }
+
           if (role === "ADMIN") {
             toast.message("Admins can't buy products", {
               description: "Please login as a customer to buy products",

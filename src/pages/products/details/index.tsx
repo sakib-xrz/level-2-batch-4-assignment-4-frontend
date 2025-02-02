@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../../redux/features/product/productApi";
 import { Image } from "antd";
 import { ShoppingOutlined } from "@ant-design/icons";
@@ -7,16 +7,33 @@ import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import RealtedProducts from "./realted-products";
+import { useAppSelector } from "../../../redux/hooks";
+import { useCurrentToken } from "../../../redux/features/auth/authSlice";
+import { verifyToken } from "../../../utils/verifyUser";
+import { toast } from "sonner";
 
 export default function ProductDetails() {
   window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
+  const navigate = useNavigate();
+  const token = useAppSelector(useCurrentToken);
+
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
+
   const { data, isLoading } = useGetSingleProductQuery(id as string, {
     skip: !id,
   });
 
   const product = data?.data;
+
+  let role = null;
+
+  if (token) {
+    const user = verifyToken(token as string);
+    // @ts-expect-error: user object might not have role
+    role = user.role;
+  }
 
   return (
     <Container>
@@ -178,7 +195,31 @@ export default function ProductDetails() {
                 disabled={!product?.in_stock}
                 onClick={(e) => {
                   e.stopPropagation();
-                  alert("Buy Now Clicked");
+
+                  if (!token) {
+                    toast.message("Please login to buy products", {
+                      description: "You need to login to buy products",
+                      action: {
+                        label: "Login",
+                        onClick: () => {
+                          navigate(
+                            `/login?next=/checkout?product=${product._id}&quantity=${quantity}`,
+                          );
+                        },
+                      },
+                    });
+                    return;
+                  }
+
+                  if (role === "ADMIN") {
+                    toast.message("Admins can't buy products", {
+                      description: "Please login as a customer to buy products",
+                    });
+                  } else {
+                    navigate(
+                      `/checkout?product=${product._id}&quantity=${quantity}`,
+                    );
+                  }
                 }}
               >
                 <ShoppingOutlined className="text-lg" />

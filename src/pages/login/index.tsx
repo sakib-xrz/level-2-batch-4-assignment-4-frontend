@@ -25,7 +25,13 @@ export default function Login() {
 
   const [loading, setLoading] = useState(false);
 
-  const nextUrl = searchParams.get("next");
+  const nextUrlString = searchParams?.toString();
+
+  let nextUrl = null;
+
+  if (nextUrlString) {
+    nextUrl = decodeURIComponent(nextUrlString)?.split("next=")[1];
+  }
 
   const [login] = useLoginMutation();
 
