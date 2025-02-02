@@ -3,7 +3,7 @@ import PaymentCancel from "../pages/payment-cancel";
 import PaymentFail from "../pages/payment-fail";
 import PaymentSuccess from "../pages/payment-success";
 import Products from "../pages/products";
-import ProductDetails from "../pages/products/details/product-details";
+import ProductDetails from "../pages/products/details";
 
 const publicRouteChildren = [
   {
