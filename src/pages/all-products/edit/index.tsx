@@ -198,8 +198,6 @@ export default function EditProduct() {
                 placeholder="Enter detail description about the bicycle"
                 modules={{
                   toolbar: [
-                    [{ header: "1" }, { header: "2" }, { font: [] }],
-                    [{ size: [] }],
                     ["bold", "italic", "underline", "strike", "blockquote"],
                     [
                       { list: "ordered" },
@@ -207,7 +205,7 @@ export default function EditProduct() {
                       { indent: "-1" },
                       { indent: "+1" },
                     ],
-                    ["link", "image"],
+                    ["link"],
                     ["clean"],
                   ],
                 }}

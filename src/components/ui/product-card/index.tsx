@@ -62,7 +62,10 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
       <button
         className={`flex w-full items-center justify-center gap-2 rounded-lg py-1 font-semibold transition sm:py-2 ${product.in_stock ? "cursor-pointer bg-[#b89579] text-white hover:bg-[#a48d70]" : "cursor-not-allowed bg-gray-300 text-gray-500"}`}
         disabled={!product.in_stock}
-        onClick={() => alert("Buy Now")}
+        onClick={(e) => {
+          e.stopPropagation();
+          alert("Buy Now Clicked");
+        }}
       >
         <ShoppingOutlined />
         Buy Now
