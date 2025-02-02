@@ -84,7 +84,7 @@ export default function Products() {
   return (
     <Container>
       <div className="flex gap-5">
-        <div className="hidden w-52 lg:block">
+        <div className="sticky top-20 hidden h-screen w-52 lg:block">
           <Filter params={params} setParams={setParams} />
         </div>
 
