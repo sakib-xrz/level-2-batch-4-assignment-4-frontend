@@ -13,6 +13,7 @@ import { Customer } from "../../types/customer.types";
 import dayjs from "dayjs";
 
 export default function Users() {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 

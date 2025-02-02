@@ -19,6 +19,7 @@ import dayjs from "dayjs";
 import { toast } from "sonner";
 
 export default function Orders() {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -106,6 +107,7 @@ export default function Orders() {
             height={50}
             src={record.product.image}
             alt={record.product.name}
+            className="aspect-square object-cover"
           />
           <div>
             <p>{record.product.name} </p>

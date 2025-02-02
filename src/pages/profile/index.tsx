@@ -9,6 +9,7 @@ import { useChangePasswordMutation } from "../../redux/features/auth/authApi";
 import { toast } from "sonner";
 
 export default function Profile() {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   const { data, isLoading } = useGetProfileQuery({});
   const user = data?.data;
 

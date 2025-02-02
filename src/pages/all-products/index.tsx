@@ -72,7 +72,13 @@ export default function AllProducts() {
       key: "name",
       render: (text: string, record: Bicycle) => (
         <div className="flex items-center gap-3">
-          <Image width={50} height={50} src={record.image} alt={record.name} />
+          <Image
+            width={50}
+            height={50}
+            src={record.image}
+            alt={record.name}
+            className="aspect-square object-cover"
+          />
           <span>{text}</span>
         </div>
       ),
