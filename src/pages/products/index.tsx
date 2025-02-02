@@ -45,8 +45,6 @@ export default function Products() {
 
   const updateURL = () => {
     const queryString = generateQueryString(params);
-    console.log(queryString);
-
     navigate(`/products${queryString}`, { replace: true });
   };
 
@@ -57,16 +55,23 @@ export default function Products() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
-  const modifiedParams = omit(
-    {
-      ...params,
-      priceRange: `${params.minPrice}-${params.maxPrice}`,
-    },
-    ["minPrice", "maxPrice"],
-  );
+  const modifyParams = () => {
+    if (params.minPrice !== null && params.maxPrice !== null) {
+      const modifiedParams = omit(
+        {
+          ...params,
+          priceRange: `${params.minPrice}-${params.maxPrice}`,
+        },
+        ["minPrice", "maxPrice"],
+      );
+      return modifiedParams;
+    } else {
+      return omit(params, ["minPrice", "maxPrice"]);
+    }
+  };
 
   const { data: productsData, isLoading } = useGetProductsQuery(
-    sanitizeParams(modifiedParams),
+    sanitizeParams(modifyParams()),
   );
 
   const products = productsData?.data || [];

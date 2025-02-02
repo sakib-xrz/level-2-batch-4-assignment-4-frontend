@@ -1,6 +1,7 @@
 import React from "react";
 import { ShoppingOutlined } from "@ant-design/icons";
 import { Tag } from "antd";
+import { useNavigate } from "react-router-dom";
 
 interface ProductProps {
   product: {
@@ -18,8 +19,12 @@ interface ProductProps {
 }
 
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
+  const navigate = useNavigate();
   return (
-    <div className="flex cursor-pointer flex-col gap-2 rounded-lg border border-gray-300 bg-white p-2 shadow-md sm:p-4">
+    <div
+      className="flex cursor-pointer flex-col gap-2 rounded-lg border border-gray-300 bg-white p-2 shadow-md sm:p-4"
+      onClick={() => navigate(`/products/${product?._id}`)}
+    >
       {/* Product Image */}
       <div className="relative rounded-lg">
         <img
@@ -57,6 +62,7 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
       <button
         className={`flex w-full items-center justify-center gap-2 rounded-lg py-1 font-semibold transition sm:py-2 ${product.in_stock ? "cursor-pointer bg-[#b89579] text-white hover:bg-[#a48d70]" : "cursor-not-allowed bg-gray-300 text-gray-500"}`}
         disabled={!product.in_stock}
+        onClick={() => alert("Buy Now")}
       >
         <ShoppingOutlined />
         Buy Now
