@@ -1,3 +1,5 @@
+import AboutUs from "../pages/about";
+import ContactUs from "../pages/contact";
 import Home from "../pages/home";
 import PaymentCancel from "../pages/payment-cancel";
 import PaymentFail from "../pages/payment-fail";
@@ -17,6 +19,14 @@ const publicRouteChildren = [
   {
     path: "/products/:id",
     element: <ProductDetails />,
+  },
+  {
+    path: "/about",
+    element: <AboutUs />,
+  },
+  {
+    path: "/contact",
+    element: <ContactUs />,
   },
   {
     path: "/payment-success",

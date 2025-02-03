@@ -1,5 +1,6 @@
 import FeaturedProducts from "./components/featured-products";
 import Hero from "./components/hero";
+import StaticSections from "./components/static-sections";
 import WhyChooseUs from "./components/why-choose-us";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <Hero />
       <FeaturedProducts />
       <WhyChooseUs />
+      <StaticSections />
     </div>
   );
 }
