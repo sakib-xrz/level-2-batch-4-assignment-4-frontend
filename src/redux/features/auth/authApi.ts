@@ -11,6 +11,14 @@ const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.profile],
     }),
+    register: builder.mutation({
+      query: (payload) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: payload,
+      }),
+      invalidatesTags: [tagTypes.profile],
+    }),
     changePassword: builder.mutation({
       query: (payload) => ({
         url: "/auth/change-password",
@@ -21,4 +29,8 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useChangePasswordMutation } = authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useChangePasswordMutation,
+} = authApi;
