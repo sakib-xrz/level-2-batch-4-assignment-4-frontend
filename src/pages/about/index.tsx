@@ -8,6 +8,7 @@ const primaryButtonStyle = `flex items-center justify-center gap-2 rounded-lg fo
 const secondaryButtonStyle = `flex items-center justify-center gap-2 rounded-lg font-semibold transition py-1.5 sm:py-2 w-full rounded-lg px-4 text-lg text-[${primaryColor}] shadow-none hover:bg-white border border-[${primaryColor}] bg-transparent cursor-pointer`;
 
 const AboutUs: React.FC = () => {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   return (
     <section className="bg-[#f8f8f8] py-20 text-gray-900">
       <div className="mx-auto max-w-7xl px-6">

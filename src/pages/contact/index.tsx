@@ -5,6 +5,7 @@ const primaryColor = "#b89579";
 const primaryButtonStyle = `flex items-center justify-center gap-2 rounded-lg font-semibold transition py-1.5 sm:py-2 w-full rounded-lg px-4 text-lg text-white shadow-none hover:bg-[#a48d70] bg-[${primaryColor}] cursor-pointer`;
 
 const ContactUs: React.FC = () => {
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   return (
     <section className="bg-[#f8f8f8] py-20 text-gray-900">
       <div className="mx-auto max-w-7xl px-6">

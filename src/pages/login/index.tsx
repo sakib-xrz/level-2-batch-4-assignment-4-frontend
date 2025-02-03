@@ -8,7 +8,7 @@ import { useLoginMutation } from "../../redux/features/auth/authApi";
 import { useAppDispatch } from "../../redux/hooks";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const loginSchema = Yup.object({
@@ -69,6 +69,11 @@ export default function Login() {
       <div className="flex h-svh items-center justify-evenly gap-5 text-base">
         <div className="xs:w-8/12 w-full lg:w-5/12">
           <Card className="w-full shadow-md">
+            <div className="flex items-center justify-center pb-3">
+              <Link to="/" className="text-3xl font-bold text-gray-900">
+                Bicycle Store
+              </Link>
+            </div>
             <p className="pb-3 text-2xl font-semibold">LOGIN</p>
             <form className="space-y-1" onSubmit={formik.handleSubmit}>
               <div className="space-y-2">
@@ -95,10 +100,17 @@ export default function Login() {
                   htmlType="submit"
                   block
                   loading={loading}
-                  className="mt-2"
+                  className="mt-2 !bg-[#b89579] !text-white !shadow-none"
                 >
                   Sign in
                 </Button>
+              </div>
+
+              <div className="mt-5 text-center">
+                Don't have an account? &nbsp;
+                <Link to="/register" className="!text-[#b89579]">
+                  Register
+                </Link>
               </div>
             </form>
           </Card>
