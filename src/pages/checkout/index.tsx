@@ -107,6 +107,7 @@ export default function Checkout() {
                 <FormInput
                   label="Phone"
                   name="phone"
+                  type="tel"
                   formik={formik}
                   required
                 />
