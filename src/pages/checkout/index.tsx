@@ -1,3 +1,4 @@
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import Container from "../../components/shared/container";
 import { useGetSingleProductQuery } from "../../redux/features/product/productApi";
@@ -43,7 +44,10 @@ export default function Checkout() {
       quantity: Number(quantity),
       delivery_address: "",
     },
-
+    validationSchema: Yup.object().shape({
+      phone: Yup.string().required("Phone is required"),
+      delivery_address: Yup.string().required("Delivery address is required"),
+    }),
     onSubmit: async (values) => {
       const payload = {
         customer: values.customer,
@@ -91,7 +95,7 @@ export default function Checkout() {
 
         <div className="mt-10">
           <form onSubmit={formik.handleSubmit}>
-            <div className="flex flex-col items-start justify-between lg:flex-row lg:gap-5">
+            <div className="flex flex-col items-start justify-between gap-5 lg:flex-row">
               <div className="w-full space-y-5">
                 <FormInput label="Name" name="name" formik={formik} disabled />
                 <FormInput
