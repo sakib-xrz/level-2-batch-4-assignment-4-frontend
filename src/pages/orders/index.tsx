@@ -44,6 +44,7 @@ export default function Orders() {
     useUpdateOrderStatusMutation();
 
   const handleUpdateOrderStatus = async (id: string, status: string) => {
+    setId(id);
     try {
       await updateOrderStatus({
         id,
@@ -62,6 +63,8 @@ export default function Orders() {
           : // @ts-expect-error error type is unknown
             error.data.message || "Failed to update order status",
       );
+    } finally {
+      setId(null);
     }
   };
 
@@ -184,8 +187,7 @@ export default function Orders() {
       render: (_text: string, record: Order) => (
         <div className="flex justify-center">
           <Select
-            loading={isUpdateOrderStatusLoading}
-            disabled={isUpdateOrderStatusLoading}
+            loading={isUpdateOrderStatusLoading && id === record._id}
             size="small"
             className="w-36"
             options={orderStatusOptions}
